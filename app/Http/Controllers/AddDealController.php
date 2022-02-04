@@ -28,7 +28,7 @@ class AddDealController extends Controller
     }
 
 
-    public function second(Request $req)
+    public function addDeal(Request $req)
     {
 
         $validation = $req->validate([
@@ -86,7 +86,9 @@ class AddDealController extends Controller
                 ]
             ]
         );
-        return redirect()->route('add-tusk')->with('deal', $add_deal->json())->with('tusk', $add_tusk->json());
+        return redirect()->route('add-tusk');
+        
+        ->with('deal', $add_deal->json())->with('tusk', $add_tusk->json())
 
     }
 }
