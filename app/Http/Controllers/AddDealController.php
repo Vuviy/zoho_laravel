@@ -86,9 +86,6 @@ class AddDealController extends Controller
                 ]
             ]
         );
-        return redirect()->route('add-tusk');
-        
-        ->with('deal', $add_deal->json())->with('tusk', $add_tusk->json())
-
+        return redirect()->route('finish_page');
     }
 }
