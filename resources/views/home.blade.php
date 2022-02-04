@@ -29,9 +29,5 @@
         </div>
         <button type="submit">send</button>
     </form>
-
-
-
-
 </body>
 </html>
