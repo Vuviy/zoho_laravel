@@ -7,7 +7,6 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
-
 Route::post('/authorization', 'App\Http\Controllers\AddDealController@authentication')->name('authorization');
 
 Route::get('/deal', function () {
@@ -16,7 +15,6 @@ Route::get('/deal', function () {
 
 Route::post('/add-deal', 'App\Http\Controllers\AddDealController@addDeal')->name('add-deal');
 
-
-Route::get('/tusk', function () {
-    return view('tusk');
-})->name('add-tusk');
+Route::get('/finish_page', function () {
+    return view('finish_page');
+})->name('finish_page');
