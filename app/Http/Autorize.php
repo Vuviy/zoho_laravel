@@ -16,7 +16,7 @@ class Autorize
             $this->client_id = $client_id;
             $this->client_secret = $client_secret;
         }
-    public function Refresh(){
+    public function refresh(){
         $response = Http::asForm()->post('https://accounts.zoho.com/oauth/v2/token', [
             'code' => $this->code,
             'redirect_uri' => 'https://exapmlexapmle.ua/vova',
@@ -24,20 +24,27 @@ class Autorize
             'client_secret' => $this->client_secret,
             'grant_type' => 'authorization_code'
         ]);
+
         if(!isset($response->json()["refresh_token"])){
-            return redirect()->route('home')->with(['error' => 'Not correct data']);
+            return redirect()->route('home')->withErrors(['error' => 'Not correct data']);
         }
+
         return $refresh_token = $response->json()["refresh_token"];
     }
-    public function Access($refresh){
+    public function access($refresh){
 
         $access = Http::asForm()->post('https://accounts.zoho.com/oauth/v2/token', [
             'refresh_token' => $refresh,
-            'redirect_uri' => 'https://exapmlexapmle.ua/vova',
+            'redirect_uri' => 'https://exapmlexapmle.ua',
             'client_id' => $this->client_id,
             'client_secret' => $this->client_secret,
             'grant_type' => 'refresh_token'
         ]);
+
+        if(!isset($access->json()["access_token"])){
+
+            return redirect()->route('home')->withErrors(['error' => 'Not correct data']);
+        }
         $access_token = $access->json()["access_token"];
 
         return redirect()->route('deal')->with('access_token', $access_token);
